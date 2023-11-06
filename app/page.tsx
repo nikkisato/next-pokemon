@@ -1,5 +1,9 @@
 export default async function Home() {
-	return <main></main>;
+	return (
+		<main>
+			<h1>HELLO</h1>
+		</main>
+	);
 }
 
 //How do I break this into smaller components HOMEWORK
