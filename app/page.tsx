@@ -7,7 +7,6 @@ export default async function Home() {
 		throw new Error('Something went wrong');
 	}
 	const data = await res.json();
-	console.log(data, 'DATA');
 	return (
 		<main>
 			{data.results.map((pokemon) => (
