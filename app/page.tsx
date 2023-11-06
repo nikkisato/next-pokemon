@@ -1,4 +1,4 @@
-export default async function Home() {
+async function getData() {
 	// I'm making a fetch call here since i'm using async in the function i have to await for the fetch response
 	const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
 
@@ -9,7 +9,12 @@ export default async function Home() {
 	if (!res.ok) {
 		throw new Error('Something went wrong');
 	}
-	const data = await res.json();
+	return res.json();
+}
+
+export default async function Home() {
+	const data = await getData();
+
 	return (
 		<main>
 			{data.results.map((pokemon) => (
