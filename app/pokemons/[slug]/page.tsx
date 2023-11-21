@@ -1,30 +1,18 @@
-import { notFound } from 'next/navigation';
-import getPokemon from '../../../lib/getPokemon';
-
+import Pokemon from '../../../components/Pokemon';
+import { Suspense } from 'react';
 interface Params {
 	params: { slug: string };
 }
-
+// Suspense can add loading spinner? within the fallback props
 export default async function Page({ params }: Params) {
-	const data = await getPokemon(params.slug);
-
-	if (!data) {
-		return notFound();
-	}
-
 	return (
 		<main>
-			<img
-				src={data.sprites.front_default}
-				alt={data.name}
-			/>
-			<h1>{data.name}</h1>
+			<h1>My Pokemon</h1>
+			<Suspense fallback="Loading">
+				<Pokemon slug={params.slug} />
+			</Suspense>
 		</main>
 	);
 }
 
-//HOW TO handle errors in app router HOMEWORK
-// https://nextjs.org/docs/advanced-features/custom-error-page
-
-// use Image next HOMEWORK
-
+//https://nextjs.org/docs/app/building-your-application/routing/route-handlers
