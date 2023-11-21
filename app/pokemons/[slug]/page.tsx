@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import getPokemon from '../../../lib/getPokemon';
+import Image from 'next/image';
 
 interface Params {
 	params: { slug: string };
@@ -14,10 +15,13 @@ export default async function Page({ params }: Params) {
 
 	return (
 		<main>
-			<img
+			<Image
 				src={data.sprites.front_default}
 				alt={data.name}
+				width={200}
+				height={200}
 			/>
+
 			<h1>{data.name}</h1>
 		</main>
 	);
@@ -25,6 +29,3 @@ export default async function Page({ params }: Params) {
 
 //HOW TO handle errors in app router HOMEWORK
 // https://nextjs.org/docs/advanced-features/custom-error-page
-
-// use Image next HOMEWORK
-

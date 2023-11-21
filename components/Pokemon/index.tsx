@@ -4,4 +4,3 @@
 // fetch pokemon data
 // display pokemon data
 // suspense for loading
-
