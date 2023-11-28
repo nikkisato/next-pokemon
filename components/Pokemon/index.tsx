@@ -34,5 +34,5 @@ export default async function Pokemon({ slug }: Props) {
 // in the api route that will make request to pokeapi
 // send data back to front end
 // use json
-// fetch api 
+// fetch api
 //https://nextjs.org/docs/app/building-your-application/routing/route-handlers
