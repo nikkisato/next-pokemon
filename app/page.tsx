@@ -1,27 +1,6 @@
 'use client';
 
 export default function Home() {
-	if (typeof document !== 'undefined') {
-		const formElement = document.getElementById('form') as HTMLFormElement;
-
-		console.log('formElement', formElement);
-
-		if (formElement) {
-			formElement.addEventListener('submit', async (event) => {
-				event.preventDefault();
-				const formData = new FormData(formElement);
-				console.log('formDataFRONT', formData);
-				const pokemonName = formData.get('pokemonName');
-				console.log('pokemonNameFRONT', pokemonName);
-
-				const res = await fetch(`/api/pokemons/${pokemonName}`);
-				const data = await res.json();
-
-				console.log('data', data);
-			});
-		}
-	}
-
 	return (
 		<main className="container mx-auto">
 			<form

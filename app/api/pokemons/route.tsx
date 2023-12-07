@@ -8,12 +8,14 @@
 // 	return Response.json({ data });
 // }
 
-// Form Data
 export async function POST(request: Request) {
-	const formData = await request.formData();
-	console.log('formData', formData);
-	const pokemonName = formData.get('pokemonName');
-	console.log('pokemonName', pokemonName);
+	console.log('HELLO');
+	const res = await request.json();
 
-	return Response.json({ pokemonName });
+	console.log('resBACKEND', res);
+
+	const resFetch = await fetch(`https://pokeapi.co/api/v2/pokemon/${res}`);
+
+	console.log('resFETCHBACKEND', resFetch);
+	return Response.json({ resFetch });
 }
