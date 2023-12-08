@@ -7,14 +7,12 @@ export default function Home() {
 		if (formElement) {
 			formElement.addEventListener('submit', async (event) => {
 				event.preventDefault();
-				// const formData = new FormData(formElement);
-				// const pokemonName = formData.get('pokemonName');
-
-				const pokemonName = (document.getElementById('pokemonName') as HTMLInputElement).value;
+				const pokemonName = (
+					document.getElementById('pokemonName') as HTMLInputElement
+				).value.toLowerCase();
 
 				try {
 					console.log('pokemonNameFRONT', pokemonName);
-					//something goes wrong here
 					const res = await fetch('/api/pokemons', {
 						method: 'POST',
 						body: JSON.stringify({ name: pokemonName }),
@@ -29,11 +27,9 @@ export default function Home() {
 					}
 
 					const responseData = await res.json();
-					console.log('responseDataFRONt', responseData);
 
 					if (responseData.name) {
-						console.log('responseData.name', responseData.name);
-						const redirectUrl = `http://localhost:3000/pokemons/${responseData.name}`;
+						const redirectUrl = `/pokemons/${responseData.name}`;
 						window.location.href = redirectUrl;
 					} else {
 						console.error('Invalid response data');
