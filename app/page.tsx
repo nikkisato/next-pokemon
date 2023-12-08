@@ -88,6 +88,17 @@ export default function Home() {
 					</div>
 				</div>
 			</form>
+
+			<ul id="pokemonList">
+				<span>For Chris here are pokemons</span>
+				<li>Pikachu</li>
+				<li>Charmander</li>
+				<li>Squirtle</li>
+				<li>eevee</li>
+				<li>snorlax</li>
+				<li>Mewtwo</li>
+				<li>Mew</li>
+			</ul>
 		</main>
 	);
 }
