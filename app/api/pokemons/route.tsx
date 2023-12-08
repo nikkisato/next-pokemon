@@ -1,5 +1,8 @@
-export async function POST(request: Request) {
+export async function GET(request: Request) {
 	try {
+		console.log('HELLO FROM THE BACKEND');
+		console.log('GET request received:', request.url);
+
 		// Step 6: we are in a async function , and also a try block, waiting for the request from the input form from the front end
 		const requestBody = await request.json();
 		// Step 7: we got the request, in JSON format, and now we just need to extract (or parse) the name from the object
@@ -19,5 +22,6 @@ export async function POST(request: Request) {
 	} catch (error) {
 		// Not a step but a catch all for errors
 		console.error(error);
+		return new Response('Internal Server Error', { status: 500 });
 	}
 }

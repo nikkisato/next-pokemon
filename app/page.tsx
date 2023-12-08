@@ -15,11 +15,14 @@ export default function Home() {
 					document.getElementById('pokemonName') as HTMLInputElement
 				).value.toLowerCase();
 
+				console.log('pokemonName', pokemonName);
+
 				try {
 					// Step 5: Send a fetch POST Call to the backend api point /api/pokemons which will then trigger a fetch to the pokemon api
 					// go to the route.tsx to continue the lesson
+
 					const res = await fetch('/api/pokemons', {
-						method: 'POST',
+						method: 'GET',
 						body: JSON.stringify({ name: pokemonName }),
 
 						headers: {
