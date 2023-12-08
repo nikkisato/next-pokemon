@@ -7,16 +7,40 @@ export default function Home() {
 		if (formElement) {
 			formElement.addEventListener('submit', async (event) => {
 				event.preventDefault();
-				const formData = new FormData(formElement);
-				const pokemonName = formData.get('pokemonName');
-				console.log('pokemonNameFRONT', pokemonName);
-				const res = await fetch('/api/pokemons', {
-					method: 'POST',
-					body: JSON.stringify(pokemonName),
-				});
-				console.log('resFront', res);
-				const data = await res.json();
-				console.log('dataFront', data);
+				// const formData = new FormData(formElement);
+				// const pokemonName = formData.get('pokemonName');
+
+				const pokemonName = (document.getElementById('pokemonName') as HTMLInputElement).value;
+
+				try {
+					console.log('pokemonNameFRONT', pokemonName);
+					//something goes wrong here
+					const res = await fetch('/api/pokemons', {
+						method: 'POST',
+						body: JSON.stringify({ name: pokemonName }),
+
+						headers: {
+							'Content-Type': 'application/json',
+						},
+					});
+
+					if (!res.ok) {
+						throw new Error(`HTTP error! Status: ${res.status}`);
+					}
+
+					const responseData = await res.json();
+					console.log('responseDataFRONt', responseData);
+
+					if (responseData.name) {
+						console.log('responseData.name', responseData.name);
+						const redirectUrl = `http://localhost:3000/pokemons/${responseData.name}`;
+						window.location.href = redirectUrl;
+					} else {
+						console.error('Invalid response data');
+					}
+				} catch {
+					new Error('Pokemon Not Valid');
+				}
 			});
 		}
 	}
