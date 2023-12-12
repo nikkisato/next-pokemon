@@ -1,5 +1,13 @@
 'use client';
 
+import { useState } from 'react';
+
+// uncontrolled and controlled
+// controlled save input value in state
+//save error to state and display the error message
+// second method is to save input value to state and then use that state to send to backend
+
+// onSubmitHandler
 export default function Home() {
 	// if (typeof document !== 'undefined') {
 	// 	// Step 1: User Inputs a Pokemon Name
@@ -50,11 +58,14 @@ export default function Home() {
 	// 	}
 	// }
 
+	const [pokemon, setPokemon] = useState<null | { name: string }>(null);
+	const [errorMessage, setErrorMessage] = useState('');
+
 	const onSubmit = async (event) => {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);
 		const pokemonName = formData.get('pokemonName');
-		formData.append('pokemonName', pokemonName);
+		// formData.append('pokemonName', pokemonName);
 
 		try {
 			console.log('pokemonNameFrontend', pokemonName);
@@ -74,22 +85,27 @@ export default function Home() {
 			// Step 12: We are also in an async function, and we are awaiting the response from the backend to be OK or status 200
 			const responseData = await res.json();
 
+			console.log('responseDataFRONT', responseData);
 			// Step 13: a checker to make sure we have a name within the response Object
-			if (responseData.pokemonData.name) {
+			if (responseData.pokemonData) {
 				// Step 14: if the object has a name, then we shall redirect the user to the pokemon page
-				const redirectUrl = `/pokemons/${responseData.pokemonData.name}`;
-				window.location.href = redirectUrl;
+				// const redirectUrl = `/pokemons/${responseData.pokemonData.name}`;
+				// window.location.href = redirectUrl;
+
+				setPokemon(responseData.pokemonData);
 			} else {
 				console.error('Invalid response data');
 			}
-		} catch {
-			new Error('Pokemon Not Valid');
+		} catch (error) {
+			const err = error as Error;
+			setErrorMessage(err.message);
 		}
 	};
 
 	return (
 		<main className="container mx-auto">
 			<form
+				// action="/api/pokemons"
 				id="form"
 				className="max-w-sm container mx-auto h-screen w-screen flex flex-col justify-center"
 				onSubmit={onSubmit}
@@ -127,6 +143,9 @@ export default function Home() {
 					</div>
 				</div>
 			</form>
+
+			{errorMessage && <p>{errorMessage}</p>}
+			{pokemon && <p>{pokemon.name}</p>}
 
 			<ul id="pokemonList">
 				<span>For Chris here are pokemons</span>

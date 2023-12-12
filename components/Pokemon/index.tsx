@@ -8,6 +8,7 @@ import Image from 'next/image';
 interface Props {
 	slug: string;
 }
+//create a client Component that accepts props
 
 export default async function Pokemon({ slug }: Props) {
 	const data = await getPokemon(slug);
@@ -28,11 +29,3 @@ export default async function Pokemon({ slug }: Props) {
 		</div>
 	);
 }
-
-// create a form to add a pokemon to the list
-// send data to back end api route
-// in the api route that will make request to pokeapi
-// send data back to front end
-// use json
-// fetch api
-//https://nextjs.org/docs/app/building-your-application/routing/route-handlers
