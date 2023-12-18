@@ -17,15 +17,33 @@
 }
 
 body {
-	color: rgb(var(--foreground-rgb));
-	background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
-		rgb(var(--background-start-rgb));
+	color: white;
+	background: black;
 }
 
-#pokemonList {
+.pokemonContainer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.pokemonCard {
+	width: 240px;
+	height: 336px;
+	background-color: white;
+	border-radius: 15px;
+	position: relative;
+}
+
+.pokemonCard img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.pokemonCard h1 {
 	position: absolute;
-	top: 0;
-	left: 0;
-	color: white;
-	padding: 50px;
+	bottom: 0;
+	color: black;
+	padding: 15px;
 }
