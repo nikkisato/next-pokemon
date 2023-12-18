@@ -9,12 +9,15 @@ import PokemonClient from '@/components/PokemonClient';
 //save error to state and display the error message
 // second method is to save input value to state and then use that state to send to backend
 
+interface Props {
+	event: any;
+}
 // onSubmitHandler
 export default function Home() {
 	const [pokemon, setPokemon] = useState<null | { name: string }>(null);
 	const [errorMessage, setErrorMessage] = useState('');
 
-	const onSubmit = async (event) => {
+	const onSubmit = async ({ event }: Props) => {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);
 		const pokemonName = formData.get('pokemonName');
@@ -42,7 +45,7 @@ export default function Home() {
 
 				const resetForm = document.getElementById('form');
 				if (resetForm != null) {
-					resetForm.reset();
+					resetForm.onreset();
 				}
 			} else {
 				console.error('Invalid response data');
