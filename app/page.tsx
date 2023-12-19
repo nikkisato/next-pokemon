@@ -1,20 +1,16 @@
 'use client';
 
-import { useState } from 'react';
-import { redirect } from 'next/navigation';
+//TODO Extracting the form into a component
+
+import { useState, useRef } from 'react';
 import PokemonClient from '@/components/PokemonClient';
 
-// uncontrolled and controlled
-// controlled save input value in state
-//save error to state and display the error message
-// second method is to save input value to state and then use that state to send to backend
-
-// onSubmitHandler
 export default function Home() {
 	const [pokemon, setPokemon] = useState<null | { name: string }>(null);
 	const [errorMessage, setErrorMessage] = useState('');
+	const formEl = useRef<HTMLFormElement>(null);
 
-	const onSubmit = async (event) => {
+	const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const formData = new FormData(event.currentTarget);
 		const pokemonName = formData.get('pokemonName');
@@ -26,23 +22,17 @@ export default function Home() {
 				body: formData,
 			});
 
-			// Step 11: we are now back from the backend, api and if the res is NOT okay, then we shall throw an error and the http status
 			if (!res.ok) {
-				console.log('Somethings WRONG');
 				throw new Error(`HTTP error! Status: ${res.status}`);
 			}
 
-			// Step 12: We are also in an async function, and we are awaiting the response from the backend to be OK or status 200
 			const responseData = await res.json();
 
-			// Step 13: a checker to make sure we have a name within the response Object
 			if (responseData.pokemonData) {
 				setPokemon(responseData.pokemonData);
-				// redirect(`http://localhost:3000/pokemons/${responseData.pokemonData.name}`);
 
-				const resetForm = document.getElementById('form');
-				if (resetForm !== null || resetForm !== undefined) {
-					resetForm.onreset();
+				if (formEl.current !== null) {
+					formEl.current.reset();
 				}
 			} else {
 				console.error('Invalid response data');
@@ -63,6 +53,7 @@ export default function Home() {
 			)}
 			<form
 				id="form"
+				ref={formEl}
 				className="max-w-sm container mx-auto h-screen w-screen flex flex-col justify-center"
 				onSubmit={onSubmit}
 			>
@@ -99,16 +90,6 @@ export default function Home() {
 					</div>
 				</div>
 			</form>
-			{/* <ul id="pokemonList">
-				<span>For Chris here are pokemons</span>
-				<li>Pikachu</li>
-				<li>Charmander</li>
-				<li>Squirtle</li>
-				<li>eevee</li>
-				<li>snorlax</li>
-				<li>Mewtwo</li>
-				<li>Mew</li>
-			</ul> */}
 		</main>
 	);
 }
