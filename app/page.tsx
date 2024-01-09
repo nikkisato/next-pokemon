@@ -1,7 +1,5 @@
 'use client';
 
-//TODO Extracting the form into a component
-
 import Form from '../components/Form/Form';
 import PokemonClient from '@/components/PokemonClient';
 import { usePokemonContext } from '@/context/pokemonContext';
