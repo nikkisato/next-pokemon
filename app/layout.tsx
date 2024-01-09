@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
-import { PokemonProvider } from '../context/pokemonContext';
+import { PokemonProvider } from '@/context/pokemonContext';
 
 const inter = Inter({ subsets: ['latin'] });
 

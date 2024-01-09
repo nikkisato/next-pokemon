@@ -1,6 +1,6 @@
 'use client';
 import React, { useRef } from 'react';
-import { usePokemonContext } from '../../context/pokemonContext';
+import { usePokemonContext } from '@/context/pokemonContext';
 
 export default function Form() {
 	const { setPokemonData, setError } = usePokemonContext();

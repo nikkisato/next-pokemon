@@ -9,10 +9,6 @@ import { usePokemonContext } from '@/context/pokemonContext';
 export default function Home() {
 	const { pokemon, errorMessage, setPokemonData, setError } = usePokemonContext();
 
-	console.log('pokemon', pokemon);
-	console.log('errorMessage', errorMessage);
-	console.log('setPokemonData', setPokemonData);
-	console.log('setError', setError);
 	return (
 		<main className="container mx-auto">
 			{errorMessage && <p>{errorMessage}</p>}
