@@ -5,6 +5,8 @@ import PokemonClient from '@/components/PokemonClient';
 import { usePokemonContext } from '@/context/pokemonContext';
 import DarkModeToggle from '@/components/DarkModeToggle/DarkModeToggle';
 import ModeWrapper from '@/components/ModeWrapper/ModeWrapper';
+import ErrorMessage from '@/components/ErrorMessage/ErrorMessage';
+import PokemonOutput from '@/components/PokemonOutput/PokemonOutput';
 
 export default function Home() {
 	const { pokemon, errorMessage, setPokemonData, setError } = usePokemonContext();
@@ -15,17 +17,13 @@ export default function Home() {
 	// Dark Mode and Light Mode, set on the body for light mode and dark mode
 
 	return (
-		<main className="container mx-auto">
-			<ModeWrapper>
+		<ModeWrapper>
+			<main className="container mx-auto">
 				<DarkModeToggle />
-				{errorMessage && <p>{errorMessage}</p>}
-				{pokemon && (
-					<div className="pokemonContainer">
-						<PokemonClient name={pokemon} />
-					</div>
-				)}
+				<ErrorMessage />
+				<PokemonOutput />
 				<Form />
-			</ModeWrapper>
-		</main>
+			</main>
+		</ModeWrapper>
 	);
 }
