@@ -60,9 +60,24 @@ body {
 .pokemonCard {
 	width: 240px;
 	height: 336px;
-	background-color: white;
 	border-radius: 15px;
 	position: relative;
+}
+
+.dark .pokemonCard {
+	background-color: white;
+
+	& h1 {
+		color: black;
+	}
+}
+
+.light .pokemonCard {
+	background-color: black;
+
+	& h1 {
+		color: white;
+	}
 }
 
 .pokemonCard img {
@@ -74,6 +89,5 @@ body {
 .pokemonCard h1 {
 	position: absolute;
 	bottom: 0;
-	color: black;
 	padding: 15px;
 }
