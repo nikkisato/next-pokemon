@@ -1,21 +1,26 @@
 'use client';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { usePokemonContext } from '@/context/pokemonContext';
 
-export default function Form() {
+export default function FormJson() {
 	const { setPokemonData, setError } = usePokemonContext();
 	const formEl = useRef<HTMLFormElement>(null);
 
+	const [pokemonName, setPokemonName] = useState<string>('');
+
+	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+		//controlled input
+		//right now i have uncontrolled input
+
+		const value = event.target.value;
+		setPokemonName(value);
+	};
+
 	const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		const formData = new FormData(event.currentTarget);
-		const pokemonName = formData.get('pokemonName');
-
+	
 		try {
-			const res = await fetch('/api/pokemons', {
-				method: 'POST',
-				body: formData,
-			});
+			const res = await fetch(`/api/pokemons/json?pokemon=${pokemonName}`);
 
 			if (!res.ok) {
 				throw new Error(`HTTP error! Status: ${res.status}`);
@@ -61,6 +66,8 @@ export default function Form() {
 						placeholder="Pokemon"
 						name="pokemonName"
 						required
+						onChange={onChangeHandler}
+						value={pokemonName}
 					/>
 				</div>
 			</div>

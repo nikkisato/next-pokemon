@@ -2,7 +2,6 @@ import { useModeContext } from '@/context/darkModeContext';
 
 export default function DarkModeToggle() {
 	const { mode, setMode } = useModeContext();
-	//style later
 
 	return (
 		<>

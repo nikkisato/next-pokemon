@@ -8,7 +8,6 @@ import Image from 'next/image';
 interface Props {
 	slug: string;
 }
-//create a client Component that accepts props
 
 export default async function Pokemon({ slug }: Props) {
 	const data = await getPokemon(slug);
