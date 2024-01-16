@@ -1,21 +1,22 @@
 'use client';
 
 import Form from '../components/Form/Form';
-import PokemonClient from '@/components/PokemonClient';
-import { usePokemonContext } from '@/context/pokemonContext';
 import DarkModeToggle from '@/components/DarkModeToggle/DarkModeToggle';
 import ModeWrapper from '@/components/ModeWrapper/ModeWrapper';
 import ErrorMessage from '@/components/ErrorMessage/ErrorMessage';
 import PokemonOutput from '@/components/PokemonOutput/PokemonOutput';
 
 export default function Home() {
-	const { pokemon, errorMessage, setPokemonData, setError } = usePokemonContext();
+	// add two more pages
+	// take care of data
+	// create a new api endpoint that accepts json data
+	// Form action on the server?
+	// set up form action on formData api endpoint https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#forms
+	// mocking the formData and then submitting the form
 
-	// Extra Error Handling into components
-	// use Dark mode https://tailwindcss.com/docs/dark-mode
-	// Extra Body into a React Component that takes children
-	// Dark Mode and Light Mode, set on the body for light mode and dark mode
+	// json form two way binding On change
 
+	//implement Json Form on a new page
 	return (
 		<ModeWrapper>
 			<main className="container mx-auto">

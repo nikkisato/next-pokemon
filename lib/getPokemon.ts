@@ -18,4 +18,3 @@ type Pokemon = {
 	};
 };
 
-// Typescript assiging type
