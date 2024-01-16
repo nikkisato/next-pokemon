@@ -47,7 +47,7 @@ export default function Form() {
 			<div className="md:flex md:items-center mb-6">
 				<div className="md:w-1/3">
 					<label
-						className="block text-white font-bold md:text-right mb-1 md:mb-0 pr-4"
+						className="block font-bold md:text-right mb-1 md:mb-0 pr-4"
 						htmlFor="inline-full-name"
 					>
 						Pokemon Name
@@ -70,7 +70,7 @@ export default function Form() {
 				<div className="md:w-2/3">
 					<button
 						type="submit"
-						className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+						className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none font-bold py-2 px-4 rounded"
 					>
 						CATCH YOUR POKEMON
 					</button>
