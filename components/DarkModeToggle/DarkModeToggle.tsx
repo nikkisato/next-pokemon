@@ -5,7 +5,7 @@ export default function DarkModeToggle() {
 
 	return (
 		<>
-			<div>
+			<div className="h-full flex justify-center items-center">
 				<button
 					onClick={() => {
 						setMode('light');

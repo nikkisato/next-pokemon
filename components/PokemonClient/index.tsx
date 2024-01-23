@@ -7,6 +7,7 @@ interface Props {
 }
 
 export default function Pokemon({ name }: Props) {
+	console.log('pokemonClient', name);
 	return (
 		<div className="pokemonCard">
 			<Image

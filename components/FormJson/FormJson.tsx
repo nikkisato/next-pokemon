@@ -9,16 +9,13 @@ export default function FormJson() {
 	const [pokemonName, setPokemonName] = useState<string>('');
 
 	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-		//controlled input
-		//right now i have uncontrolled input
-
 		const value = event.target.value;
 		setPokemonName(value);
 	};
 
 	const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-	
+
 		try {
 			const res = await fetch(`/api/pokemons/json?pokemon=${pokemonName}`);
 
@@ -27,7 +24,6 @@ export default function FormJson() {
 			}
 
 			const responseData = await res.json();
-
 			if (responseData.pokemonData) {
 				setPokemonData(responseData.pokemonData);
 
