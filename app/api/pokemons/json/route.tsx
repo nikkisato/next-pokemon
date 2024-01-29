@@ -1,11 +1,25 @@
-import { type NextRequest } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 
-export function GET(request: NextRequest) {
-	const searchParams = request.nextUrl.searchParams;
-	const query = searchParams.get('pokemon');
-	// query is "hello" for /api/search?query=hello
+export async function GET(request: NextRequest) {
+	try {
+		const searchParams = request.nextUrl.searchParams;
+		const query = searchParams.get('pokemon');
+		const queryString = query?.toString().toLowerCase();
 
-	console.log('query', query);
+		try {
+			const pokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${queryString}`);
+			// Check if pokemon is okay when fetching data
+			if (!pokemonResponse.ok) {
+				throw new Error(`HTTP error! Status: ${pokemonResponse.status}`);
+			}
+			const pokemonData = await pokemonResponse.json();
 
-	Response.json({ query });
+			return Response.json({ pokemonData });
+		} catch (error) {
+			throw error;
+		}
+	} catch (error) {
+		console.error('Error:', error);
+		return new NextResponse('Something went wrong', { status: 500 });
+	}
 }

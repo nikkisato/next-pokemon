@@ -86,3 +86,12 @@
 	bottom: 0;
 	padding: 15px;
 }
+
+.link {
+	text-decoration: underline;
+	color: blue;
+}
+
+.header {
+	padding: 20px 0;
+}
