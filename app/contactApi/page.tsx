@@ -1,19 +1,26 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-// interface ContactInfo {
-// 	name: string;
-// 	email: string;
-// 	message: string;
-// }
+interface ContactInfo {
+	name: string;
+	email: string;
+	message: string;
+}
+
 // I kinda got overwhelmed with the naming, how to difference between the interface and the state props if that makes sense
+// tuple?
 
 export default function ContactApi() {
-	const [contactInfo, setContactInfo] = useState({
+	const [contactInfo, setContactInfo] = useState<ContactInfo>({
 		name: '',
 		email: '',
 		message: '',
 	});
+
+	const [isSuccess, setIsSuccess] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+
+	// change to useState for each name, email, message
 
 	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value } = event.target;
@@ -28,7 +35,7 @@ export default function ContactApi() {
 		});
 	};
 
-	//had warnings about changing controlled inputs to uncontrolled  inputs
+	//had warnings about changing controlled inputs to uncontrolled inputs
 	useEffect(() => {
 		setContactInfo({
 			name: '',
@@ -36,13 +43,18 @@ export default function ContactApi() {
 			message: '',
 		});
 	}, []);
+
 	const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		try {
+			setIsLoading(true);
 			const res = await fetch(`/api/contact`, {
 				body: JSON.stringify(contactInfo),
 				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
 			});
 
 			// ask if i Should have used formData instead?
@@ -52,14 +64,15 @@ export default function ContactApi() {
 			}
 
 			const responseData = await res.json();
-
-			//TODO A side effect on successful submission it would be nice to have a success message
-			//TODO "thank you, Chris we will get back to you as soon as possible or something like that"
+			setIsSuccess(true);
 
 			console.log('Front responseData', responseData);
 		} catch (error) {
 			const err = error as Error;
 			console.error(err.message);
+		} finally {
+			//google this
+			setIsLoading(false);
 		}
 	};
 
@@ -67,8 +80,9 @@ export default function ContactApi() {
 		<>
 			<div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
 				<h1>Contact Form API</h1>
+				{isLoading && <p>Loading...</p>}
+				{isSuccess && <p>Thank you for your message</p>}
 				<form
-					action="#"
 					className="space-y-8"
 					onSubmit={onSubmit}
 				>
@@ -123,9 +137,13 @@ export default function ContactApi() {
 							value={contactInfo.message}
 						></textarea>
 					</div>
+
 					<button
 						type="submit"
-						className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none font-bold py-2 px-4 rounded"
+						className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none aria-disabled:opacity-20 font-bold py-2 px-4 rounded"
+						aria-disabled={isLoading}
+						disabled={isLoading}
+						// look at tailwind css for aria disabled or disabled
 					>
 						Send message
 					</button>

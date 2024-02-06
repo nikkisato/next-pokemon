@@ -1,8 +1,9 @@
 'use Server';
+//https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#forms
 
 import { useState } from 'react';
 
-export default function ContacServer() {
+export default function ContactServer() {
 	// this one submits to the server
 	async function handleServerAction() {
 		const rawhtmlFormData = {
