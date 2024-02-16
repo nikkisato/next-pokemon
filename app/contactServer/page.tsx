@@ -6,6 +6,8 @@ import { useState } from 'react';
 export default function ContactServer() {
 	// this one submits to the server
 	async function handleServerAction() {
+		//why?
+		'use server';
 		const rawhtmlFormData = {
 			name: '',
 			email: '',
