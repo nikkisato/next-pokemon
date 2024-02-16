@@ -1,33 +1,13 @@
-'use Server';
 //https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#forms
-
-import { useState } from 'react';
-
 export default function ContactServer() {
 	// this one submits to the server
 	async function handleServerAction() {
 		//why?
 		'use server';
-		const rawhtmlFormData = {
-			name: '',
-			email: '',
-			message: '',
-		};
 	}
-
-	const [contactInfo, setContactInfo] = useState({
-		name: '',
-		email: '',
-		message: '',
-	});
 
 	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value } = event.target;
-		setContactInfo((prevContactInfo) => ({
-			...prevContactInfo,
-			[name]: value,
-		}));
-		console.log('contactInfo', contactInfo);
 	};
 
 	return (
