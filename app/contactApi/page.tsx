@@ -92,7 +92,7 @@ export default function ContactApi() {
 							required
 							name="name"
 							onChange={onChangeHandler}
-							value={name}
+							value={name.toString()}
 						/>
 					</div>
 					<div>
@@ -109,7 +109,7 @@ export default function ContactApi() {
 							required
 							name="email"
 							onChange={onChangeHandler}
-							value={email}
+							value={email.toString()}
 						/>
 					</div>
 					<div className="sm:col-span-2">
@@ -126,7 +126,7 @@ export default function ContactApi() {
 							placeholder="Leave a message..."
 							onChange={onChangeHandler}
 							name="message"
-							value={message}
+							value={message.toString()}
 						></textarea>
 					</div>
 
