@@ -1,5 +1,4 @@
 // this is for the contactServer Form
 
-export async function createContact() {
-    
-}
+// loading state
+export async function createContact() {}

@@ -1,56 +1,60 @@
 //https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#forms
-// 'use client';
-// import { useState } from 'react';
+import { revalidatePath } from 'next/cache';
+// google type
 
-// import ServerSuccess from '../ServerSuccess/ServerSuccess';
+import SubmitButton from '../../components/SubmitButton';
+
+//Prisma https://www.prisma.io/
+// create a prisma Database
+// SQLlite file 
+
+type Contact = { name: string; email: string; message: string };
+
+const contacts: Contact[] = [];
 
 export default function ContactServer() {
-	// const [isSuccess, setIsSuccess] = useState(false);
-	// const [isLoading, setIsLoading] = useState(false);
-	//
-	// can i add useState here for the form data?
-	// const [formData, setFormData] = useState<FormData>();
-
-	// I'm lost on how i can show a success message to the client
 	async function handleServerAction(formData: FormData) {
 		'use server';
 
 		try {
-			// according to the examples, we ned rawFormData, but where do we set it?
-			// When we submit we are using the FormData API to get the values from the form
-			// setIsLoading(true);
-
 			const rawFormData = {
-				name: formData.get('name'),
-				email: formData.get('email'),
-				message: formData.get('message'),
+				name: formData.get('name') as string,
+				email: formData.get('email') as string,
+				message: formData.get('message') as string,
 			};
-			// setIsSuccess(true);
 			console.log('rawFormData', rawFormData);
 
-			// wait for the fetch to complete
-			// const res = await fetch('/api/contact', {});
-			// if (!res.ok) {
-			// 	throw new Error(`HTTP error! Status: ${res.status}`);
-			// }
-			// const responseData = await res.json();
-			// console.log('responseData', responseData);
+			await new Promise((resolve, reject) => {
+				return setTimeout(resolve, 3000);
+			});
 
-			// return responseData;
+			//type coercion , not best practice
+			contacts.push(rawFormData);
+			// https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#server-side-validation-and-error-handling
+			// revalidation?
+			// saving the form to the database
+			// update the page after the database
+			//mimic database
+
+			revalidatePath('/contactServer');
+			//to reset form after submit
 		} catch (err) {
 			console.error('error', err);
-		} finally {
-			// setIsLoading(false);
 		}
 	}
 
 	return (
 		<>
-			{/* {isLoading && <div>Loading...</div>}
-			{isSuccess && <div>Thank you for your message</div>} */}
+			{contacts.map((contact) => {
+				return (
+					<div key={contact.email}>
+						<h2>{contact.name}</h2>
+						<p>{contact.email}</p>
+						<p>{contact.message}</p>
+					</div>
+				);
+			})}
 			<div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-				{/* <ServerSuccess /> */}
-
 				<h1>Contact Form Server</h1>
 				<form
 					action={handleServerAction}
@@ -101,12 +105,7 @@ export default function ContactServer() {
 							name="message"
 						></textarea>
 					</div>
-					<button
-						type="submit"
-						className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none font-bold py-2 px-4 rounded"
-					>
-						Send message
-					</button>
+					<SubmitButton />
 				</form>
 			</div>
 		</>
