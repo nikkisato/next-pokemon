@@ -1,51 +1,45 @@
 'use client';
-import { useEffect, useState } from 'react';
-
-interface ContactInfo {
-	name: string;
-	email: string;
-	message: string;
-}
-
-// I kinda got overwhelmed with the naming, how to difference between the interface and the state props if that makes sense
-// tuple?
+import { useState } from 'react';
 
 export default function ContactApi() {
-	const [contactInfo, setContactInfo] = useState<ContactInfo>({
-		name: '',
-		email: '',
-		message: '',
-	});
+	// using a generic since i removed the Interface
+	const [name, setName] = useState<String>('');
+	const [email, setEmail] = useState<String>('');
+	const [message, setMessage] = useState<String>('');
 
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
-	// change to useState for each name, email, message
-
 	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value } = event.target;
 
-		setContactInfo((prevContactInfo) => {
-			const updatedContactInfo = {
-				...prevContactInfo,
-				[name]: value,
-			};
-
-			return updatedContactInfo;
-		});
+		// checking the name of the input and setting the state accordingly
+		switch (name) {
+			case 'name':
+				setName(value);
+				break;
+			case 'email':
+				setEmail(value);
+				break;
+			case 'message':
+				setMessage(value);
+				break;
+			default:
+				break;
+		}
 	};
-
-	//had warnings about changing controlled inputs to uncontrolled inputs
-	useEffect(() => {
-		setContactInfo({
-			name: '',
-			email: '',
-			message: '',
-		});
-	}, []);
 
 	const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+
+		//combining them into one object for the fetch
+		const contactInfo = {
+			name: name,
+			email: email,
+			message: message,
+		};
+
+		console.log('ContactInfo', contactInfo);
 
 		try {
 			setIsLoading(true);
@@ -56,8 +50,6 @@ export default function ContactApi() {
 					'Content-Type': 'application/json',
 				},
 			});
-
-			// ask if i Should have used formData instead?
 
 			if (!res.ok) {
 				throw new Error(`HTTP error! Status: ${res.status}`);
@@ -100,7 +92,7 @@ export default function ContactApi() {
 							required
 							name="name"
 							onChange={onChangeHandler}
-							value={contactInfo.name}
+							value={name.toString()}
 						/>
 					</div>
 					<div>
@@ -117,7 +109,7 @@ export default function ContactApi() {
 							required
 							name="email"
 							onChange={onChangeHandler}
-							value={contactInfo.email}
+							value={email.toString()}
 						/>
 					</div>
 					<div className="sm:col-span-2">
@@ -134,7 +126,7 @@ export default function ContactApi() {
 							placeholder="Leave a message..."
 							onChange={onChangeHandler}
 							name="message"
-							value={contactInfo.message}
+							value={message.toString()}
 						></textarea>
 					</div>
 

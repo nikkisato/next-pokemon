@@ -1,39 +1,63 @@
-'use Server';
 //https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#forms
+import { revalidatePath } from 'next/cache';
+// google type
 
-import { useState } from 'react';
+import SubmitButton from '../../components/SubmitButton';
+
+//Prisma https://www.prisma.io/
+// create a prisma Database
+// SQLlite file 
+
+type Contact = { name: string; email: string; message: string };
+
+const contacts: Contact[] = [];
 
 export default function ContactServer() {
-	// this one submits to the server
-	async function handleServerAction() {
-		const rawhtmlFormData = {
-			name: '',
-			email: '',
-			message: '',
-		};
+	async function handleServerAction(formData: FormData) {
+		'use server';
+
+		try {
+			const rawFormData = {
+				name: formData.get('name') as string,
+				email: formData.get('email') as string,
+				message: formData.get('message') as string,
+			};
+			console.log('rawFormData', rawFormData);
+
+			await new Promise((resolve, reject) => {
+				return setTimeout(resolve, 3000);
+			});
+
+			//type coercion , not best practice
+			contacts.push(rawFormData);
+			// https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations#server-side-validation-and-error-handling
+			// revalidation?
+			// saving the form to the database
+			// update the page after the database
+			//mimic database
+
+			revalidatePath('/contactServer');
+			//to reset form after submit
+		} catch (err) {
+			console.error('error', err);
+		}
 	}
-
-	const [contactInfo, setContactInfo] = useState({
-		name: '',
-		email: '',
-		message: '',
-	});
-
-	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-		const { name, value } = event.target;
-		setContactInfo((prevContactInfo) => ({
-			...prevContactInfo,
-			[name]: value,
-		}));
-		console.log('contactInfo', contactInfo);
-	};
 
 	return (
 		<>
+			{contacts.map((contact) => {
+				return (
+					<div key={contact.email}>
+						<h2>{contact.name}</h2>
+						<p>{contact.email}</p>
+						<p>{contact.message}</p>
+					</div>
+				);
+			})}
 			<div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
 				<h1>Contact Form Server</h1>
 				<form
-					action="#"
+					action={handleServerAction}
 					className="space-y-8"
 				>
 					<div>
@@ -48,7 +72,6 @@ export default function ContactServer() {
 							id="email"
 							className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
 							required
-							onChange={onChangeHandler}
 							name="email"
 						/>
 					</div>
@@ -64,7 +87,6 @@ export default function ContactServer() {
 							id="name"
 							className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
 							required
-							onChange={onChangeHandler}
 							name="name"
 						/>
 					</div>
@@ -80,16 +102,10 @@ export default function ContactServer() {
 							rows={6}
 							className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
 							placeholder="Leave a message..."
-							onChange={onChangeHandler}
 							name="message"
 						></textarea>
 					</div>
-					<button
-						type="submit"
-						className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none font-bold py-2 px-4 rounded"
-					>
-						Send message
-					</button>
+					<SubmitButton />
 				</form>
 			</div>
 		</>
