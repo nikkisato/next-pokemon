@@ -27,12 +27,12 @@ main()
 // data: {
 // 	name: 'Alice',
 // 	email: 'alice@prisma.io',
-// 	// message: [
-// 	// 	{
-// 	// 		title: 'Hello World',
-// 	// 		content: 'I am a Message',
-// 	// 	},
-// 	// ],\
+ 	// message: [
+	// 	{
+	// 		title: 'Hello World',
+	// 		content: 'I am a Message',
+ 	// 	},
+	// ],\
 // 	posts: {
 // 		create: {
 // 			title: 'Hello World',
