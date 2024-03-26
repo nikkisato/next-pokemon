@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import getAllPokemon from '../lib/getAllPokemon';
 
-export default async function fetchPokemonPages(query) {
+export default async function fetchPokemonPages(query: any) {
 	// fetch pokemon pages
 	// console.log('query', query);
 	// const data = await getAllPokemon();
