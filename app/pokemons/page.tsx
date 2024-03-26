@@ -15,9 +15,7 @@ export default async function Page({
 	const query = searchParams?.query || '';
 	const currentPage = Number(searchParams?.page) || 1;
 
-	const totalPages = await fetchPokemonPages(query);
-
-	console.log('totalPages', totalPages);
+	// const totalPages = await fetchPokemonPages(query);
 
 	return (
 		<main className="container mx-auto">
@@ -32,7 +30,6 @@ export default async function Page({
 					<PokemonList
 						query={query}
 						currentPage={currentPage}
-						// data={totalPages}
 					/>
 				</Suspense>
 
