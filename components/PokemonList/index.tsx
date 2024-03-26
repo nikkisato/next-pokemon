@@ -2,14 +2,17 @@ import { notFound } from 'next/navigation';
 import getAllPokemon from '../../lib/getAllPokemon';
 import Image from 'next/image';
 
-export default async function PokemonList() {
+export default async function PokemonList({
+	query,
+	currentPage,
+}: {
+	query: string;
+	currentPage: number;
+}) {
+	// const invoices = await fetchFilteredInvoices(query, currentPage);
+
 	const data = await getAllPokemon();
 
-	if (!data) {
-		return notFound();
-	}
-
-	// Fetch Pokemon data and images concurrently
 	const pokemonWithImages = await Promise.all(
 		data.results.map(async (pokemon, index) => {
 			const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${index + 1}`);
@@ -23,6 +26,10 @@ export default async function PokemonList() {
 			};
 		})
 	);
+
+	if (!data) {
+		return notFound();
+	}
 
 	return (
 		<div className="grid grid-cols-4 gap-4 p-0	">
