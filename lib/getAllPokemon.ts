@@ -8,7 +8,9 @@ async function getAllPokemon() {
 		console.log('Something went wrong');
 		return null;
 	}
-	return res.json();
+
+	const data = await res.json();
+	return data.results;
 }
 
 export default getAllPokemon;

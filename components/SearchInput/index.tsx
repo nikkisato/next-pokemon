@@ -21,7 +21,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
 			params.delete('query');
 		}
 		replace(`${pathname}?${params.toString()}`);
-	}, 300);
+	}, 600);
 
 	return (
 		<div className="mx-auto py-4 flex justify-center">
