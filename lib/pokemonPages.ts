@@ -1,22 +1,15 @@
-import { notFound } from 'next/navigation';
-import getAllPokemon from '../lib/getAllPokemon';
+export default async function fetchPokemonPages(currentPage: Number) {
+	console.log('currentPage', currentPage);
+	// fetch pokemon count
+	const res = await fetch(`https://pokeapi.co/api/v2/pokemon`);
+	const data = await res.json();
 
-export default async function fetchPokemonPages(query: any) {
-	// fetch pokemon pages
-	// console.log('query', query);
-	// const data = await getAllPokemon();
-	// const pokemonWithImages = await Promise.all(
-	// 	data.results.map(async (pokemon, index) => {
-	// 		const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${index + 1}`);
-	// 		const result = await res.json();
-	// 		const imageUrl = result.sprites.front_default;
-	// 		return {
-	// 			...pokemon,
-	// 			imageUrl,
-	// 		};
-	// 	})
-	// );
-	// if (!data) {
-	// 	return notFound();
-	// }
+	// Get total number of Pokémon
+	const numberOfPokemon = data.count;
+
+	// Calculate total number of pages based on items per page (20)
+	const itemsPerPage = 20;
+	const totalPages = Math.ceil(numberOfPokemon / itemsPerPage);
+
+	return totalPages;
 }

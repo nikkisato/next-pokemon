@@ -11,37 +11,55 @@ export default async function PokemonList({
 	query: string;
 	currentPage: number;
 }) {
-	console.log('query', query);
+	let pokemonWithImages = [];
 
-	// const invoices = await fetchFilteredInvoices(query, currentPage);
+	console.log('currentPage', currentPage);
 
-	const data = await searchPokemon(query);
+	if (!query) {
+		// If there's no query, fetch all Pokémon
+		const allPokemonData = await getAllPokemon();
+		const pageSize = 20; // Number of items per page
+		const offset = (currentPage - 1) * pageSize; // Calculate the offset based on the current page
 
-	if (!data) {
-		return notFound();
+		pokemonWithImages = await Promise.all(
+			allPokemonData.slice(offset, offset + pageSize).map(async (pokemon: any, index: number) => {
+				const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`);
+				const result = await res.json();
+
+				const imageUrl = result.sprites.front_default;
+
+				return {
+					...pokemon,
+					imageUrl,
+				};
+			})
+		);
+	} else {
+		// If there's a query, search for Pokémon
+		const data = await searchPokemon(query);
+
+		if (!data) {
+			return notFound();
+		}
+
+		pokemonWithImages = await Promise.all(
+			data.map(async (pokemon: any, index: number) => {
+				const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`);
+				const result = await res.json();
+
+				const imageUrl = result.sprites.front_default;
+
+				return {
+					...pokemon,
+					imageUrl,
+				};
+			})
+		);
 	}
 
-	console.log('data', data);
-
-	const pokemonWithImages = await Promise.all(
-		//look at the data.results.map this needs to pass down from the getAllPokemon function
-		data.map(async (pokemon: any, index: number) => {
-			const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${index + 1}`);
-			const result = await res.json();
-
-			const imageUrl = result.sprites.front_default;
-
-			return {
-				...pokemon,
-				imageUrl,
-			};
-		}) || []
-	);
-
 	return (
-		<div className="grid grid-cols-4 gap-4 p-0	">
+		<div className="grid grid-cols-4 gap-4 p-0 ">
 			{pokemonWithImages.map((pokemon, index) => {
-				console.log('pokemon', pokemon);
 				return (
 					<div
 						key={index}

@@ -16,7 +16,7 @@ export default async function Page({
 	const query = searchParams?.query || '';
 	const currentPage = Number(searchParams?.page) || 1;
 
-	// const totalPages = await fetchPokemonPages(query);
+	const totalPages = await fetchPokemonPages(currentPage);
 
 	return (
 		<main className="container mx-auto">
@@ -38,7 +38,10 @@ export default async function Page({
 				</Suspense>
 
 				<div className="mt-5 flex w-full justify-center">
-					{/* <Pagination totalPages={totalPages} /> */}
+					<Pagination
+						totalPages={totalPages}
+						currentPage={currentPage}
+					/>
 				</div>
 			</div>
 		</main>

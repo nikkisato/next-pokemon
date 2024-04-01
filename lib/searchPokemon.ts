@@ -1,14 +1,13 @@
 async function searchPokemon(name: string) {
-	console.log('name', name);
-
-	const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}/`);
+	const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}/`);
 
 	if (!res.ok) {
-		console.log('res.status', res.status);
+		console.log('res.status Search Pokemon', res.status);
 		return [];
 	}
 
 	const data = await res.json();
+
 	return [data];
 }
 
