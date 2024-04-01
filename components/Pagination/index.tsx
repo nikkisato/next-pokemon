@@ -24,7 +24,7 @@ export default function Pagination({ totalPages, currentPage }: PaginationProps)
 
 	//pokeapi.co/api/v2/{endpoint}/?offset=0&limit=20
 
-	https: const pagesToShow: number[] = [];
+	const pagesToShow: number[] = [];
 	for (let i = 1; i <= totalPages; i++) {
 		pagesToShow.push(i);
 	}
