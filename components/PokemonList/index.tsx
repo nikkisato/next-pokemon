@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import getAllPokemon from '../../lib/getAllPokemon';
 import Image from 'next/image';
 import searchPokemon from '@/lib/searchPokemon';
+import Navigation from '../Navigation/Navigation';
 
 export default async function PokemonList({
 	query,
@@ -53,7 +54,7 @@ export default async function PokemonList({
 							height={200}
 							className="w-full"
 						/>
-						<h2 className="py-2">{pokemon.name.toUpperCase()}</h2>
+						<h2 className="py-2">{pokemon?.name?.toUpperCase()}</h2>
 					</div>
 				);
 			})}

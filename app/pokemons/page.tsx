@@ -3,6 +3,7 @@ import PokemonList from '@/components/PokemonList';
 import SearchInput from '@/components/SearchInput';
 import fetchPokemonPages from '../../lib/pokemonPages';
 import Pagination from '@/components/Pagination';
+import Navigation from '@/components/Navigation/Navigation';
 
 export default async function Page({
 	searchParams,
@@ -19,7 +20,10 @@ export default async function Page({
 
 	return (
 		<main className="container mx-auto">
-			<h1 className="text-center py-5">Pokemon List</h1>
+			<Navigation
+				className="text-center py-5"
+				title="Pokemon List"
+			/>
 			<SearchInput placeholder="Search Pokemon" />
 
 			<div className="container mx-auto">
