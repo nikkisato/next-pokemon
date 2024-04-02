@@ -1,3 +1,4 @@
+import Navigation from '../Navigation/Navigation';
 interface Props {
 	title: string;
 }
@@ -5,19 +6,7 @@ interface Props {
 export default function Header({ title }: Props) {
 	return (
 		<div className="header h-full flex justify-evenly items-center">
-			<a
-				className="link"
-				href="/"
-			>
-				FormData
-			</a>
-			<h1>{title}</h1>
-			<a
-				className="link"
-				href="/json"
-			>
-				JSON
-			</a>
+			<Navigation title={title} />
 		</div>
 	);
 }

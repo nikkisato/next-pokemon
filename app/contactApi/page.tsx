@@ -1,4 +1,5 @@
 'use client';
+import Navigation from '@/components/Navigation/Navigation';
 import { useState } from 'react';
 
 export default function ContactApi() {
@@ -71,7 +72,7 @@ export default function ContactApi() {
 	return (
 		<>
 			<div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-				<h1>Contact Form API</h1>
+				<Navigation title="Contact Form API" />
 				{isLoading && <p>Loading...</p>}
 				{isSuccess && <p>Thank you for your message</p>}
 				<form

@@ -3,10 +3,11 @@ import { revalidatePath } from 'next/cache';
 // google type
 
 import SubmitButton from '../../components/SubmitButton';
+import Navigation from '@/components/Navigation/Navigation';
 
 //Prisma https://www.prisma.io/
 // create a prisma Database
-// SQLlite file 
+// SQLlite file
 
 type Contact = { name: string; email: string; message: string };
 
@@ -55,7 +56,7 @@ export default function ContactServer() {
 				);
 			})}
 			<div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-				<h1>Contact Form Server</h1>
+				<Navigation title="Contact Form Server" />
 				<form
 					action={handleServerAction}
 					className="space-y-8"
