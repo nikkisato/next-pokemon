@@ -3,6 +3,7 @@ import getAllPokemon from '../../lib/getAllPokemon';
 import Image from 'next/image';
 import searchPokemon from '@/lib/searchPokemon';
 import Navigation from '../Navigation/Navigation';
+import fetchPokemonPages from '../../lib/pokemonPages';
 
 export default async function PokemonList({
 	query,
@@ -13,17 +14,22 @@ export default async function PokemonList({
 }) {
 	let pokemonWithImages = [];
 
-	console.log('currentPage', currentPage);
+	console.log('currentPage Pokemon List', currentPage);
+
+	console.log('query Pokemon List', query);
 
 	if (!query) {
+		console.log('Running in NO QUERY Block');
+
 		// If there's no query, fetch all Pokémon
-		const allPokemonData = await getAllPokemon();
-		const pageSize = 20; // Number of items per page
-		const offset = (currentPage - 1) * pageSize; // Calculate the offset based on the current page
+		const allPokemonData = await fetchPokemonPages(currentPage);
+		console.log('allPokemonData Query Block', allPokemonData);
+
+		console.log('allPokemonData.data.results', allPokemonData.data.results);
 
 		pokemonWithImages = await Promise.all(
-			allPokemonData.slice(offset, offset + pageSize).map(async (pokemon: any, index: number) => {
-				const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`);
+			allPokemonData.data.results.map(async (pokemon: any, index: number) => {
+				const res = await fetch(pokemon.url);
 				const result = await res.json();
 
 				const imageUrl = result.sprites.front_default;
@@ -35,8 +41,10 @@ export default async function PokemonList({
 			})
 		);
 	} else {
+		console.log('Running in Else Block');
 		// If there's a query, search for Pokémon
 		const data = await searchPokemon(query);
+		console.log('data Else Block', data);
 
 		if (!data) {
 			return notFound();

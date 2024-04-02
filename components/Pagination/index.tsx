@@ -10,6 +10,8 @@ interface PaginationProps {
 	currentPage: number;
 }
 
+// create a seperate function to fetch all total pages
+
 export default function Pagination({ totalPages, currentPage }: PaginationProps) {
 	const pathname = usePathname();
 	const searchParams = useSearchParams();

@@ -4,6 +4,7 @@ import SearchInput from '@/components/SearchInput';
 import fetchPokemonPages from '../../lib/pokemonPages';
 import Pagination from '@/components/Pagination';
 import Navigation from '@/components/Navigation/Navigation';
+import getAllPokemon from '@/lib/getAllPokemon';
 
 export default async function Page({
 	searchParams,
@@ -16,7 +17,17 @@ export default async function Page({
 	const query = searchParams?.query || '';
 	const currentPage = Number(searchParams?.page) || 1;
 
-	const totalPages = await fetchPokemonPages(currentPage);
+	console.log('currentPage', currentPage);
+
+	//https://www.algolia.com/pricing/
+	//https://www.algolia.com/doc/api-client/getting-started/install/javascript/?client=javascript
+
+	// getting the total pages
+	const res = await getAllPokemon();
+	const count = res.count;
+
+	const itemsPerPage = 20;
+	const totalPages = Math.ceil(count / itemsPerPage);
 
 	return (
 		<main className="container mx-auto">

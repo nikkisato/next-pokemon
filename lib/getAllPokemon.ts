@@ -8,14 +8,7 @@ async function getAllPokemon() {
 	}
 
 	const data = await res.json();
-	return data.results;
+	return data;
 }
 
 export default getAllPokemon;
-
-// type Pokemon = {
-// 	name: string;
-// 	sprites: {
-// 		front_default: string;
-// 	};
-// };
