@@ -35,10 +35,11 @@ async function fetchPokemonInfo(url) {
 	}
 }
 
+// bring this into algolia.js
 async function getAllPokemon() {
 	let allPokemon = [];
 	let url = 'https://pokeapi.co/api/v2/pokemon';
-
+	let loopCount = 0;
 	while (url) {
 		const pokemonData = await fetchPokemonData(url);
 		for (const pokemon of pokemonData.results) {
@@ -49,21 +50,27 @@ async function getAllPokemon() {
 			process.stdout.cursorTo(0);
 			process.stdout.write(`Progress: ${progress}%`);
 		}
-		url = pokemonData.next;
+		loopCount++;
+		// this is the bail out condition
+		// infinite loop
+		if (loopCount > 70) {
+			url = null;
+		} else {
+			url = pokemonData.next;
+		}
 	}
-
 	return allPokemon;
 }
 
-async function generateJSONFile() {
-	const allPokemon = await getAllPokemon();
-	fs.writeFile('pokemon_data.json', JSON.stringify(allPokemon, null, 4), (err) => {
-		if (err) {
-			console.error('Error writing JSON file:', err);
-			return;
-		}
-		console.log('\npokemon_data.json has been created successfully.');
-	});
-}
+// async function generateJSONFile() {
+// 	const allPokemon = await getAllPokemon();
+// 	fs.writeFile('pokemon_data.json', JSON.stringify(allPokemon, null, 4), (err) => {
+// 		if (err) {
+// 			console.error('Error writing JSON file:', err);
+// 			return;
+// 		}
+// 		console.log('\npokemon_data.json has been created successfully.');
+// 	});
+// }
 
-generateJSONFile();
+// generateJSONFile();

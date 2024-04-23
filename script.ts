@@ -20,6 +20,7 @@ main()
 		process.exit(1);
 	});
 
+export default main;
 // this will send queries to your database with prisma client
 
 //CHRIS WHY DON"T MESSAGES WORK?
@@ -27,12 +28,12 @@ main()
 // data: {
 // 	name: 'Alice',
 // 	email: 'alice@prisma.io',
- 	// message: [
-	// 	{
-	// 		title: 'Hello World',
-	// 		content: 'I am a Message',
- 	// 	},
-	// ],\
+// message: [
+// 	{
+// 		title: 'Hello World',
+// 		content: 'I am a Message',
+// 	},
+// ],\
 // 	posts: {
 // 		create: {
 // 			title: 'Hello World',
