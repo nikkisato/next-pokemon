@@ -55,7 +55,60 @@ initAlgolia()
 		console.error(error.message);
 	});
 
-function transformPokemon(data) {
+// typescript Check
+interface Pokemon {
+	name: string;
+	id: number;
+	height: number;
+	weight: number;
+	types: string[];
+	abilities: string[];
+	base_experience: number;
+	stats: Record<string, number>;
+	image: string;
+}
+// Needed a type check for Pokemon Type and Pokemon Ability
+interface PokemonType {
+	type: {
+		name: string;
+	};
+}
+
+interface PokemonAbility {
+	ability: {
+		name: string;
+	};
+}
+
+interface PokemonStats {
+	//Chris Need help
+	stats: [
+		{
+			stat: {
+				stat: {
+					name: string;
+				};
+			};
+		}
+	];
+}
+
+interface PokemonStat {
+	base_stat: number;
+}
+// "stats": [
+//     {
+//       "base_stat": 48,
+//       "effort": 1,
+//       "stat": {
+//         "name": "hp",
+//         "url": "https://pokeapi.co/api/v2/stat/1/"
+//       }
+//     },
+// ]
+
+// Pokemon[] returns an array of pokemons
+function transformPokemon(data: any[]): Pokemon[] {
 	const records = data.map((pokemon) => {
 		//single pokemon
 		return {
@@ -63,19 +116,15 @@ function transformPokemon(data) {
 			id: pokemon.id,
 			height: pokemon.height,
 			weight: pokemon.weight,
-			types: pokemon.types.map((t) => t.type.name),
-			abilities: pokemon.abilities.map((a) => a.ability.name),
+			types: pokemon.types.map((t: PokemonType) => t.type.name),
+			abilities: pokemon.abilities.map((a: PokemonAbility) => a.ability.name),
 			base_experience: pokemon.base_experience,
-			stats: pokemon.stats.reduce((stats, stat) => {
+			stats: pokemon.stats.reduce((stats, stat: PokemonStat) => {
 				stats[stat.stat.name] = stat.base_stat;
 				return stats;
-			}, {}),
+			}),
 			image: pokemon.sprites.other['official-artwork'].front_default,
 		};
 	});
 	return records;
 }
-
-
-// typescript Check
-const Pokemon
