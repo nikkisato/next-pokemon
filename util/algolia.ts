@@ -82,6 +82,9 @@ interface PokemonAbility {
 
 interface PokemonStats {
 	//Chris Need help
+	// Pokemon Stats comes in an Array of objects
+	// https://stackoverflow.com/questions/25469244/how-can-i-define-an-interface-for-an-array-of-objects
+	// indenexer?
 	stats: [
 		{
 			stat: {
@@ -92,6 +95,15 @@ interface PokemonStats {
 		}
 	];
 }
+// attempted to split it up
+// interface PokemonStatsMain {
+// 	stats: Array<Type>;
+// }
+// interface Type {
+// 	stat: {
+// 		name: string;
+// 	};
+// }
 
 interface PokemonStat {
 	base_stat: number;
