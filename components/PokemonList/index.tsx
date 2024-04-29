@@ -14,18 +14,18 @@ export default async function PokemonList({
 }) {
 	let pokemonWithImages = [];
 
-	console.log('currentPage Pokemon List', currentPage);
+	// console.log('currentPage Pokemon List', currentPage);
 
-	console.log('query Pokemon List', query);
+	// console.log('query Pokemon List', query);
 
 	if (!query) {
-		console.log('Running in NO QUERY Block');
+		// console.log('Running in NO QUERY Block');
 
 		// If there's no query, fetch all Pokémon
 		const allPokemonData = await fetchPokemonPages(currentPage);
-		console.log('allPokemonData Query Block', allPokemonData);
+		// console.log('allPokemonData Query Block', allPokemonData);
 
-		console.log('allPokemonData.data.results', allPokemonData.data.results);
+		// console.log('allPokemonData.data.results', allPokemonData.data.results);
 
 		pokemonWithImages = await Promise.all(
 			allPokemonData.data.results.map(async (pokemon: any, index: number) => {
@@ -41,10 +41,10 @@ export default async function PokemonList({
 			})
 		);
 	} else {
-		console.log('Running in Else Block');
+		// console.log('Running in Else Block');
 		// If there's a query, search for Pokémon
 		const data = await searchPokemon(query);
-		console.log('data Else Block', data);
+		// console.log('data Else Block', data);
 
 		if (!data) {
 			return notFound();

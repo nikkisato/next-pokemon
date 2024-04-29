@@ -1,7 +1,7 @@
 // IMPORTANT PATH: util/algolia.js
 require('dotenv').config({ path: './.env' });
 import algoliasearch from 'algoliasearch';
-import getAllPokemon from '@/lib/getAllPokemon';
+import getAllPaginationPokemon from '../lib/getAllPaginationPokemon';
 
 async function initAlgolia() {
 	// Retrieve Algolia App ID and Admin API Key from environment variables
@@ -13,32 +13,35 @@ async function initAlgolia() {
 	}
 
 	// TODO: also create Type for Pokemon in transformPokemon
+	// TODO: got stuck on Stats
 
 	// If I finish build the search
 	// algolia create a new index
 	// try and get the pokemon data but NOT Saving to a JSON
 	// https://www.algolia.com/doc/api-reference/api-methods/partial-update-objects/
 	// Connect and authenticate with your Algolia app
+
 	const client = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_ADMIN_API_KEY);
 
 	// This creates a new Index in the algolia
-	const index = client.initIndex('pokemon1');
+	const index = client.initIndex('pokemonDatabase');
 
 	// This is the record that we are going to add to the index that we created above
 	// const record = { objectID: 1, name: 'test_record' };
 
-	const data = await getAllPokemon();
+	const data = await getAllPaginationPokemon();
 	// Extra the map into a separate function
+
+	console.log('data', data);
 
 	const records = transformPokemon(data);
 	//typescripts Check
 
 	// saving to algolia
 	// index.saveObjects(array objects)
-	// index.saveObjects(array objects, {
-	//     autoGenerateObjectIDIfNotExist: boolean
-	//     // Any other requestOptions
-	//   })
+	// index.saveObjects(array, objects, {
+	// 	autoGenerateObjectIDIfNotExist: boolean,
+	// });
 
 	// index a new index
 	await index.saveObjects(records);
@@ -134,7 +137,7 @@ function transformPokemon(data: any[]): Pokemon[] {
 			types: pokemon.types.map((t: PokemonType) => t.type.name),
 			abilities: pokemon.abilities.map((a: PokemonAbility) => a.ability.name),
 			base_experience: pokemon.base_experience,
-			stats: pokemon.stats.reduce((stats, stat: PokemonStat) => {
+			stats: pokemon.stats.reduce((stats: any, stat: PokemonStat) => {
 				stats[stat.stat.name] = stat.base_stat;
 				return stats;
 			}),

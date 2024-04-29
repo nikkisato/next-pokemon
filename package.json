@@ -8,7 +8,8 @@
 		"start": "next start",
 		"lint": "next lint",
 		"postinstall": "prisma generate",
-		"ts": "npx ts-node --project tsconfig-dev.json run.ts"
+		"ts": "npx ts-node --project tsconfig-dev.json run.ts",
+		"aloglia": "npx ts-node --project tsconfig-dev.json util/algolia.ts"
 	},
 	"dependencies": {
 		"@prisma/client": "^5.10.2",
