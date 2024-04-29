@@ -21,7 +21,7 @@ async function fetchPokemonInfo(url: any) {
 		const response = await fetch(url);
 		const data = await response.json();
 
-		const name = data.name.replace('-', ' ');
+		const name = data?.name.replace('-', ' ');
 		const pokemonInfo = {
 			name: name,
 			id: data.id,
@@ -50,7 +50,6 @@ async function getAllPaginationPokemon() {
 
 	while (url) {
 		pokemonData = await fetchPokemonData(url);
-		console.log('pokemonData', pokemonData);
 
 		for (const pokemon of pokemonData.results) {
 			const pokemonInfo = await fetchPokemonInfo(pokemon.url);
@@ -60,7 +59,7 @@ async function getAllPaginationPokemon() {
 		loopCount++;
 		// this is the bail out condition
 		// infinite loop
-		if (loopCount > 70) {
+		if (loopCount > 67) {
 			// TODO: it was giving me a warning since null is not identified as a string
 			url = '';
 		} else {

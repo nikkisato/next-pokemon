@@ -2,9 +2,12 @@ import main from './script';
 import getAllPaginationPokemon from './lib/getAllPaginationPokemon';
 
 function run() {
-	const data = getAllPaginationPokemon();
-	console.log('data', data);
-	// console.log('Hello World!');
+	try {
+		const data = getAllPaginationPokemon();
+		console.log('data', data);
+	} catch (error) {
+		console.error('Something went Wrong');
+	}
 }
 
 run();

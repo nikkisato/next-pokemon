@@ -32,20 +32,12 @@ async function initAlgolia() {
 	const data = await getAllPaginationPokemon();
 	// Extra the map into a separate function
 
-	console.log('data', data);
-
-	const records = transformPokemon(data);
-	//typescripts Check
+	// const records = await transformPokemon(data);
 
 	// saving to algolia
-	// index.saveObjects(array objects)
-	// index.saveObjects(array, objects, {
-	// 	autoGenerateObjectIDIfNotExist: boolean,
-	// });
-
-	// index a new index
-	await index.saveObjects(records);
-	// unsure what saveObjects returns
+	await index.saveObjects(data, {
+		autoGenerateObjectIDIfNotExist: true,
+	});
 
 	// Create a cron job to fetch and update
 }
@@ -60,7 +52,7 @@ initAlgolia()
 
 // typescript Check
 interface Pokemon {
-	name: string;
+	name2: string;
 	id: number;
 	height: number;
 	weight: number;
@@ -70,6 +62,7 @@ interface Pokemon {
 	stats: Record<string, number>;
 	image: string;
 }
+
 // Needed a type check for Pokemon Type and Pokemon Ability
 interface PokemonType {
 	type: {
@@ -126,23 +119,20 @@ interface PokemonStat {
 // ]
 
 // Pokemon[] returns an array of pokemons
-function transformPokemon(data: any[]): Pokemon[] {
-	const records = data.map((pokemon) => {
-		//single pokemon
-		return {
-			name: pokemon.name,
-			id: pokemon.id,
-			height: pokemon.height,
-			weight: pokemon.weight,
-			types: pokemon.types.map((t: PokemonType) => t.type.name),
-			abilities: pokemon.abilities.map((a: PokemonAbility) => a.ability.name),
-			base_experience: pokemon.base_experience,
-			stats: pokemon.stats.reduce((stats: any, stat: PokemonStat) => {
-				stats[stat.stat.name] = stat.base_stat;
-				return stats;
-			}),
-			image: pokemon.sprites.other['official-artwork'].front_default,
-		};
-	});
-	return records;
-}
+// function transformPokemon(data: any[]): Pokemon[] {
+// 	const records = data.map((pokemon) => {
+
+// 		return {
+// 			name2: pokemon?.name,
+// 			id: pokemon.id,
+// 			height: pokemon.height,
+// 			weight: pokemon.weight,
+// 			types: pokemon.types.map((t: PokemonType) => t.type?.name),
+// 			abilities: pokemon.abilities.map((a: PokemonAbility) => a.ability?.name),
+// 			base_experience: pokemon.base_experience,
+// 			stats: stats,
+// 			image: pokemon.sprites.other['official-artwork'].front_default,
+// 		};
+// 	});
+// 	return records;
+// }
