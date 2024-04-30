@@ -4,6 +4,13 @@ import Image from 'next/image';
 import searchPokemon from '@/lib/searchPokemon';
 import Navigation from '../Navigation/Navigation';
 import fetchPokemonPages from '../../lib/pokemonPages';
+import {
+	Pokemon,
+	PokemonType,
+	PokemonAbility,
+	PokemonStat,
+	PokemonStats,
+} from '@/util/pokemonType';
 
 export default async function PokemonList({
 	query,
@@ -14,18 +21,18 @@ export default async function PokemonList({
 }) {
 	let pokemonWithImages = [];
 
-	console.log('currentPage Pokemon List', currentPage);
+	// console.log('currentPage Pokemon List', currentPage);
 
-	console.log('query Pokemon List', query);
+	// console.log('query Pokemon List', query);
 
 	if (!query) {
-		console.log('Running in NO QUERY Block');
+		// console.log('Running in NO QUERY Block');
 
 		// If there's no query, fetch all Pokémon
 		const allPokemonData = await fetchPokemonPages(currentPage);
-		console.log('allPokemonData Query Block', allPokemonData);
+		// console.log('allPokemonData Query Block', allPokemonData);
 
-		console.log('allPokemonData.data.results', allPokemonData.data.results);
+		// console.log('allPokemonData.data.results', allPokemonData.data.results);
 
 		pokemonWithImages = await Promise.all(
 			allPokemonData.data.results.map(async (pokemon: any, index: number) => {
@@ -41,21 +48,18 @@ export default async function PokemonList({
 			})
 		);
 	} else {
-		console.log('Running in Else Block');
+		// console.log('Running in Else Block');
 		// If there's a query, search for Pokémon
 		const data = await searchPokemon(query);
-		console.log('data Else Block', data);
+		// console.log('data Else Block', data);
 
 		if (!data) {
 			return notFound();
 		}
 
 		pokemonWithImages = await Promise.all(
-			data.map(async (pokemon: any, index: number) => {
-				const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`);
-				const result = await res.json();
-
-				const imageUrl = result.sprites.front_default;
+			data.hits.map(async (pokemon: any, index: number) => {
+				const imageUrl = pokemon.image;
 
 				return {
 					...pokemon,

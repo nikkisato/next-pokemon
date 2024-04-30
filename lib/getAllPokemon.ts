@@ -2,9 +2,7 @@ async function getAllPokemon() {
 	const res = await fetch(`https://pokeapi.co/api/v2/pokemon`);
 
 	if (!res.ok) {
-		// throw new Error('Something went wrong');
-		console.log('Something went wrong');
-		return null;
+		throw new Error('Something went wrong');
 	}
 
 	const data = await res.json();
