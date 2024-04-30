@@ -39,7 +39,7 @@ async function initAlgolia() {
 		autoGenerateObjectIDIfNotExist: true,
 	});
 
-	// Create a cron job to fetch and update
+	//TODO: Create a cron job to fetch and update
 }
 
 initAlgolia()

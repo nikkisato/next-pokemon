@@ -51,11 +51,8 @@ export default async function PokemonList({
 		}
 
 		pokemonWithImages = await Promise.all(
-			data.map(async (pokemon: any, index: number) => {
-				const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`);
-				const result = await res.json();
-
-				const imageUrl = result.sprites.front_default;
+			data.hits.map(async (pokemon: any, index: number) => {
+				const imageUrl = pokemon.image;
 
 				return {
 					...pokemon,

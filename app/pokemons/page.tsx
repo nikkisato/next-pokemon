@@ -17,7 +17,7 @@ export default async function Page({
 	const query = searchParams?.query || '';
 	const currentPage = Number(searchParams?.page) || 1;
 
-	console.log('currentPage', currentPage);
+	// console.log('currentPage', currentPage);
 
 	//https://www.algolia.com/pricing/
 	//https://www.algolia.com/doc/api-client/getting-started/install/javascript/?client=javascript
