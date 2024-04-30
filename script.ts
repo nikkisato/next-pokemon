@@ -1,26 +1,28 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+// const { PrismaClient } = require('@prisma/client');
+// const prisma = new PrismaClient();
 
-async function main() {
-	const usersWithPosts = await prisma.user.findMany({
-		include: {
-			posts: true,
-		},
-	});
-	console.dir(usersWithPosts, { depth: null });
-}
+// async function main() {
+// 	const usersWithPosts = await prisma.user.findMany({
+// 		include: {
+// 			posts: true,
+// 		},
+// 	});
+// 	console.dir(usersWithPosts, { depth: null });
+// }
 
-main()
-	.then(async () => {
-		await prisma.$disconnect();
-	})
-	.catch(async (e) => {
-		console.error(e);
-		await prisma.$disconnect();
-		process.exit(1);
-	});
+// main()
+// 	.then(async () => {
+// 		await prisma.$disconnect();
+// 	})
+// 	.catch(async (e) => {
+// 		console.error(e);
+// 		await prisma.$disconnect();
+// 		process.exit(1);
+// 	});
 
-export default main;
+// export default main;
+
+
 // this will send queries to your database with prisma client
 
 //CHRIS WHY DON"T MESSAGES WORK?
