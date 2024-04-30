@@ -37,7 +37,8 @@ async function fetchPokemonInfo(url: any) {
 			types: data.types.map((t: PokemonType) => t.type.name),
 			abilities: data.abilities.map((a: PokemonAbility) => a.ability.name),
 			base_experience: data.base_experience,
-			stats: data.stats.reduce((stats, stat: PokemonStat) => {
+			// TODO: Fix this Stats
+			stats: data.stats.reduce((stats: any, stat: PokemonStat) => {
 				stats[stat.stat.name] = stat.base_stat;
 				return stats;
 			}, {}),
