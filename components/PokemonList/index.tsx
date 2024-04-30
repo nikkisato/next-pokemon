@@ -4,6 +4,13 @@ import Image from 'next/image';
 import searchPokemon from '@/lib/searchPokemon';
 import Navigation from '../Navigation/Navigation';
 import fetchPokemonPages from '../../lib/pokemonPages';
+import {
+	Pokemon,
+	PokemonType,
+	PokemonAbility,
+	PokemonStat,
+	PokemonStats,
+} from '@/util/pokemonType';
 
 export default async function PokemonList({
 	query,

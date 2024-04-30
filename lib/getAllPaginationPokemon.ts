@@ -1,4 +1,11 @@
 // create a loop to get all pagination
+import {
+	Pokemon,
+	PokemonType,
+	PokemonAbility,
+	PokemonStat,
+	PokemonStats,
+} from '@/util/pokemonType';
 
 async function fetchPokemonData(url: string) {
 	try {
@@ -22,15 +29,15 @@ async function fetchPokemonInfo(url: any) {
 		const data = await response.json();
 
 		const name = data?.name.replace('-', ' ');
-		const pokemonInfo = {
+		const pokemonInfo: Pokemon = {
 			name: name,
 			id: data.id,
 			height: data.height,
 			weight: data.weight,
-			types: data.types.map((t) => t.type.name),
-			abilities: data.abilities.map((a) => a.ability.name),
+			types: data.types.map((t: PokemonType) => t.type.name),
+			abilities: data.abilities.map((a: PokemonAbility) => a.ability.name),
 			base_experience: data.base_experience,
-			stats: data.stats.reduce((stats, stat) => {
+			stats: data.stats.reduce((stats, stat: PokemonStat) => {
 				stats[stat.stat.name] = stat.base_stat;
 				return stats;
 			}, {}),
