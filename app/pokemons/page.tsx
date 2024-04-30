@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Suspense } from 'react';
 import PokemonList from '@/components/PokemonList';
 import SearchInput from '@/components/SearchInput';
@@ -29,6 +30,16 @@ export default async function Page({
 	const itemsPerPage = 20;
 	const totalPages = Math.ceil(count / itemsPerPage);
 
+	//the src is in the public folder
+	const LoadingFallback = () => (
+		<div className="flex justify-center animate-pulse">
+			<img
+				className="w-72 h-72 "
+				src="/pokeball.jpeg"
+				alt="Loading Pokémon"
+			/>
+		</div>
+	);
 	return (
 		<main className="container mx-auto">
 			<Navigation
@@ -39,7 +50,7 @@ export default async function Page({
 
 			<div className="container mx-auto">
 				<Suspense
-					fallback="Loading"
+					fallback={<LoadingFallback />}
 					key={query + currentPage}
 				>
 					<PokemonList
