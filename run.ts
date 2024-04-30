@@ -1,9 +1,9 @@
 import main from './script';
 import getAllPaginationPokemon from './lib/getAllPaginationPokemon';
 
-function run() {
+async function run() {
 	try {
-		const data = getAllPaginationPokemon();
+		const data = await getAllPaginationPokemon();
 		console.log('data', data);
 	} catch (error) {
 		console.error('Something went Wrong');

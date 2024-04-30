@@ -5,7 +5,11 @@ import {
 	PokemonAbility,
 	PokemonStat,
 	PokemonStats,
+	PokemonPagination,
 } from '@/util/pokemonType';
+
+// TODO: Tidy
+// TODO: end to end Cypress test smoke test??
 
 async function fetchPokemonData(url: string) {
 	try {
@@ -26,9 +30,11 @@ async function fetchPokemonInfo(url: any) {
 	try {
 		//switch axios with fetch
 		const response = await fetch(url);
-		const data = await response.json();
+		const data: PokemonPagination = await response.json();
 
-		const name = data?.name.replace('-', ' ');
+		console.log('data', data);
+
+		const name = data.name.replace('-', ' ');
 		const pokemonInfo: Pokemon = {
 			name: name,
 			id: data.id,
@@ -37,12 +43,11 @@ async function fetchPokemonInfo(url: any) {
 			types: data.types.map((t: PokemonType) => t.type.name),
 			abilities: data.abilities.map((a: PokemonAbility) => a.ability.name),
 			base_experience: data.base_experience,
-			// TODO: Fix this Stats
-			stats: data.stats.reduce((stats: any, stat: PokemonStat) => {
+			stats: data.stats.reduce((stats: any, stat: any) => {
 				stats[stat.stat.name] = stat.base_stat;
 				return stats;
 			}, {}),
-			image: data.sprites.other['official-artwork'].front_default,
+			image: data.image,
 		};
 		return pokemonInfo;
 	} catch (error) {
