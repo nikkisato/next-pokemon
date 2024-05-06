@@ -5,7 +5,7 @@ interface Props {
 
 export default function Header({ title }: Props) {
 	return (
-		<div className="header h-full flex justify-evenly items-center">
+		<div className="header h-full flex flex-col align-center text-center">
 			<Navigation title={title} />
 		</div>
 	);

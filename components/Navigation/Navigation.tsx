@@ -7,9 +7,9 @@ export default function Navigation({ title, className }: Props) {
 	return (
 		<>
 			<h1 className={className}>{title}</h1>
-			<nav className="flex">
-				<ul>
-					<li>
+			<nav className="flex justify-evenly">
+				<ul className="flex justify-evenly mx-2">
+					<li className="mx-2">
 						<a
 							className="link"
 							href="/"
@@ -17,7 +17,7 @@ export default function Navigation({ title, className }: Props) {
 							FormData
 						</a>
 					</li>
-					<li>
+					<li className="mx-2">
 						<a
 							className="link"
 							href="/json"
@@ -26,7 +26,7 @@ export default function Navigation({ title, className }: Props) {
 						</a>
 					</li>
 
-					<li>
+					<li className="mx-2">
 						<a
 							className="link"
 							href="/contactServer"
@@ -34,7 +34,7 @@ export default function Navigation({ title, className }: Props) {
 							Contact Server
 						</a>
 					</li>
-					<li>
+					<li className="mx-2">
 						<a
 							className="link"
 							href="/contactApi"
@@ -42,7 +42,7 @@ export default function Navigation({ title, className }: Props) {
 							Contact Api
 						</a>
 					</li>
-					<li>
+					<li className="mx-2">
 						<a
 							className="link"
 							href="/pokemons"
