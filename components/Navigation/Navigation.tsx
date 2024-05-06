@@ -12,7 +12,7 @@ export default function Navigation({ title, className }: Props) {
 					<li className="mx-2">
 						<a
 							className="link"
-							href="/"
+							href="/formData"
 						>
 							FormData
 						</a>

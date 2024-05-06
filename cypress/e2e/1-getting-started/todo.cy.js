@@ -18,7 +18,7 @@ describe('example to-do app', () => {
 		// Since we want to visit the same URL at the start of all our tests,
 		// we include it in our beforeEach function so that it runs before each test
 
-		cy.visit('http://localhost:300/');
+		cy.visit('https://next-pokemon-75aw-git-feature-cypress-test-nikkisatos-projects.vercel.app/');
 	});
 
 	it('displays 5 Links for Navigation', () => {
