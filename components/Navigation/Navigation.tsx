@@ -7,7 +7,10 @@ export default function Navigation({ title, className }: Props) {
 	return (
 		<>
 			<h1 className={className}>{title}</h1>
-			<nav className="flex justify-evenly">
+			<nav
+				id="navigation"
+				className="flex justify-evenly"
+			>
 				<ul className="flex justify-evenly mx-2">
 					<li className="mx-2">
 						<a
