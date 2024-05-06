@@ -1,4 +1,3 @@
-require('dotenv').config({ path: './.env' });
 import algoliasearch from 'algoliasearch';
 
 async function searchPokemon(name: string) {
