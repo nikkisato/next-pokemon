@@ -10,7 +10,10 @@ import ModeWrapper from '@/components/ModeWrapper/ModeWrapper';
 export default function formDataPage() {
 	return (
 		<ModeWrapper>
-			<main className="container mx-auto">
+			<main
+				id="main"
+				className="container mx-auto"
+			>
 				<Header title="FORMDATA" />
 				<DarkModeToggle />
 				<ErrorMessage />

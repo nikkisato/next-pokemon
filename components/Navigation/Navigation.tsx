@@ -1,3 +1,5 @@
+import SkipLink from '../SkipLink';
+
 interface Props {
 	title: string;
 	className?: string;
@@ -7,11 +9,12 @@ export default function Navigation({ title, className }: Props) {
 	return (
 		<>
 			<h1 className={className}>{title}</h1>
-			<nav
-				id="navigation"
-				className="flex justify-evenly"
-			>
-				<ul className="flex justify-evenly mx-2">
+			<SkipLink />
+			<nav className="flex justify-evenly">
+				<ul
+					id="navigation"
+					className="flex justify-evenly mx-2"
+				>
 					<li className="mx-2">
 						<a
 							className="link"

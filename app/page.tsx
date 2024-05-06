@@ -7,9 +7,11 @@ import Header from '@/components/Header/Header';
 export default function Home() {
 	return (
 		<ModeWrapper>
-			<main className="container mx-auto h-full">
+			<main
+				id="main"
+				className="container mx-auto h-full"
+			>
 				<Header title="Homepage" />
-				<DarkModeToggle />
 			</main>
 		</ModeWrapper>
 	);
