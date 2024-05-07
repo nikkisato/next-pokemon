@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+// https://learn.cypress.io/tutorials/running-our-tests-with-github-actions
+
 describe('Nikki Next Pokemon App', () => {
 	beforeEach(() => {
 		cy.visit('http://localhost:3000/');
