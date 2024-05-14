@@ -4,7 +4,7 @@
 
 describe('Nikki Next Pokemon App', () => {
 	beforeEach(() => {
-		cy.visit('http://localhost:3000/');
+		cy.visit('/');
 	});
 
 	it('displays 5 Links for Navigation', () => {

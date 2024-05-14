@@ -2,7 +2,7 @@
 
 context('Heading Levels', () => {
 	beforeEach(() => {
-		cy.visit('http://localhost:3000/');
+		cy.visit('/');
 	});
 
 	it('Website Should have H1', () => {
