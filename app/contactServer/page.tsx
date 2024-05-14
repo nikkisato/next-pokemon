@@ -55,60 +55,62 @@ export default function ContactServer() {
 					</div>
 				);
 			})}
-			<div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-				<Navigation title="Contact Form Server" />
-				<form
-					action={handleServerAction}
-					className="space-y-8"
-				>
-					<div>
-						<label
-							htmlFor="email"
-							className="block font-bold md:text-left mb-1 md:mb-0 pr-4"
-						>
-							Your email
-						</label>
-						<input
-							type="email"
-							id="email"
-							className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-							required
-							name="email"
-						/>
-					</div>
-					<div>
-						<label
-							htmlFor="subject"
-							className="block font-bold md:text-left mb-1 md:mb-0 pr-4"
-						>
-							Name
-						</label>
-						<input
-							type="text"
-							id="name"
-							className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-							required
-							name="name"
-						/>
-					</div>
-					<div className="sm:col-span-2">
-						<label
-							htmlFor="message"
-							className="block font-bold md:text-left mb-1 md:mb-0 pr-4"
-						>
-							Your message
-						</label>
-						<textarea
-							id="message"
-							rows={6}
-							className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-							placeholder="Leave a message..."
-							name="message"
-						></textarea>
-					</div>
-					<SubmitButton />
-				</form>
-			</div>
+			<main id="main">
+				<div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+					<Navigation title="Contact Form Server" />
+					<form
+						action={handleServerAction}
+						className="space-y-8"
+					>
+						<div>
+							<label
+								htmlFor="email"
+								className="block font-bold md:text-left mb-1 md:mb-0 pr-4"
+							>
+								Your email
+							</label>
+							<input
+								type="email"
+								id="email"
+								className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+								required
+								name="email"
+							/>
+						</div>
+						<div>
+							<label
+								htmlFor="subject"
+								className="block font-bold md:text-left mb-1 md:mb-0 pr-4"
+							>
+								Name
+							</label>
+							<input
+								type="text"
+								id="name"
+								className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+								required
+								name="name"
+							/>
+						</div>
+						<div className="sm:col-span-2">
+							<label
+								htmlFor="message"
+								className="block font-bold md:text-left mb-1 md:mb-0 pr-4"
+							>
+								Your message
+							</label>
+							<textarea
+								id="message"
+								rows={6}
+								className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+								placeholder="Leave a message..."
+								name="message"
+							></textarea>
+						</div>
+						<SubmitButton />
+					</form>
+				</div>
+			</main>
 		</>
 	);
 }

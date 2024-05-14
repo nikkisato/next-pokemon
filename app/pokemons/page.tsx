@@ -41,7 +41,10 @@ export default async function Page({
 		</div>
 	);
 	return (
-		<main className="container mx-auto">
+		<main
+			id="main"
+			className="container mx-auto"
+		>
 			<Navigation
 				className="text-center py-5"
 				title="Pokemon List"

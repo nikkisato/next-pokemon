@@ -16,7 +16,10 @@ export default function Home() {
 	//implement Json Form on a new page
 	return (
 		<ModeWrapper>
-			<main className="container mx-auto">
+			<main
+				id="main"
+				className="container mx-auto"
+			>
 				<Header title="JSON" />
 				<DarkModeToggle />
 				<ErrorMessage />
